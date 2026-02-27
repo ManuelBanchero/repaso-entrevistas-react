@@ -87,7 +87,7 @@ Esto hace que React sea una herramienta muy útil para construir interfaces comp
 
 Por ejemplo, este es un nav creado con Boostrap para una web.
 
-![Screenshot 2025-04-24 at 19.10.28.png](attachment:dfa3ffe0-5525-4f3b-a750-f287d3141d32:Screenshot_2025-04-24_at_19.10.28.png)
+![Nav w/bootstrap](./public/por-qué-es-composable.png)
 
 Si la web tiene distintas páginas que utilizan el mismo nav, entonces debemos copiarlo y pegarlo en cada una de ellas, y si quiero modificar algo, debo hacerlo en todas y cada una de ellas.
 
@@ -868,19 +868,19 @@ export default function Body() {
 
 Para esto, hay que entender el siguiente árbol:
 
-![Screenshot 2025-05-01 at 13.24.50.png](attachment:41837c5e-a1d1-46cb-824e-cad796329e5c:Screenshot_2025-05-01_at_13.24.50.png)
+![diagrama de árbol que representa los componentes de la app](./public/cómo-se-pasan-states-entre-diferentes-componentes(1).png)
 
 Como vemos, el Header no puede pasarle la data al body, porque ambos son hijos de App, por lo tanto, App debería ser quien cree el state y lo pase como props a sus hijos:
 
-![Screenshot 2025-05-01 at 13.27.03.png](attachment:325e3d7e-437e-41d0-bfa5-dd2d082e7231:Screenshot_2025-05-01_at_13.27.03.png)
+![diagrama de árbol que representa los componentes de la app](./public/cómo-se-pasan-states-entre-diferentes-componentes(2).png)
 
 Mientras construimos nuestra app, también nos podemos encontrar con que otro hijo necesita información del state
 
-![Screenshot 2025-05-01 at 13.27.29.png](attachment:949186e8-e282-4fab-883f-8fe3a3ef6f3a:Screenshot_2025-05-01_at_13.27.29.png)
+![diagrama de árbol que representa los componentes de la app](./public/cómo-se-pasan-states-entre-diferentes-componentes(3).png)
 
 Lo que nos fuerza también a llevar el state a un componente más arriba:
 
-![Screenshot 2025-05-01 at 13.28.49.png](attachment:45902d9f-120d-41f0-9893-ee53db7b1aa8:Screenshot_2025-05-01_at_13.28.49.png)
+![diagrama de árbol que representa los componentes de la app](./public/cómo-se-pasan-states-entre-diferentes-componentes(4).png)
 
 Esto con el tiempo se puede hacer más complejo de manejar, por eso existen cosas como **context** que veremos más adelante.
 
@@ -945,9 +945,9 @@ Y acá te dejos ejemplos de la [documentación de React](https://react.dev/learn
 
 1. **Actualización del estado en función de los props o el estado:**
     
-    ![Screenshot 2025-05-08 at 15.57.12.png](attachment:6d9a8f95-2489-46f1-aefe-ae0202ba4e60:Screenshot_2025-05-08_at_15.57.12.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(1).png)
     
-    ![Screenshot 2025-05-08 at 15.57.25.png](attachment:824dde89-b186-4000-8410-930bf7790117:Screenshot_2025-05-08_at_15.57.25.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(2).png)
     
 2. **Almacenamiento en caché de cálculos costosos:**
     
@@ -1403,7 +1403,7 @@ Mientras que la biblioteca de *React*, a secas, es el motor de creación de com
 
 1. **Rendering**: Todos los componentes hijos que pertenecen a la rama afectada son re-renderizados, en el orden visto en [Full App render](https://www.notion.so/Full-App-render-208f81e8719b8009bfa1d53823b7cfc2?pvs=21), por lo tanto, todos los cálculos, funciones, useEffects, entre otros, vuelven a ser ejecutados.
     
-    ![Screenshot 2025-06-04 at 11.41.25.png](attachment:664dc9a1-3790-4c8e-8f03-faa264163297:Screenshot_2025-06-04_at_11.41.25.png)
+    ![Árbol con la estructura de los componentes de la app](./public/cuáles-son-las-3-fases-del-renderizado-en-react(1).png)
     
     ***En esta fase se crea lo que se conoce como virtual DOM model***.
     
@@ -1411,17 +1411,17 @@ Mientras que la biblioteca de *React*, a secas, es el motor de creación de com
     
 2. **Reconciliation**: React compara el antiguo virtual DOM que tenía almacenado, con el nuevo ***virtual DOM*** que fue creado en la primera fase, utilizando un “diffing algorithm”, y determinando así que fue lo que realmente cambió con el último render.
     
-    ![Screenshot 2025-06-02 at 12.47.16.png](attachment:60439a06-0d97-4f01-9513-f420a81cd8de:Screenshot_2025-06-02_at_12.47.16.png)
+    ![Árbol con la estructura de los componentes de la app](./public/cuáles-son-las-3-fases-del-renderizado-en-react(2).png)
     
     Supongamos que el componente que causo el re-render no esta pasando el state a ninguno de sus hijos, es decir, que solo se afecto a si mismo:
     
-    ![Screenshot 2025-06-02 at 12.49.52.png](attachment:346d6a53-24d3-4eaf-a3de-5ab3841f3c2b:Screenshot_2025-06-02_at_12.49.52.png)
+    ![Árbol con la estructura de los componentes de la app](./public/cuáles-son-las-3-fases-del-renderizado-en-react(3).png)
     
     El color naranja es lo que el state realmente esta afectando. Por lo tanto, en este caso, aunque todos sus hijos tuvieron un re-render, gracias a la fase 2, React sabe que el único afectado es el componente que esta en naranja, y por lo tanto, ***el único que debe pasar a la fase 3***.
     
 3. **Commit**: Una vez identificados los componentes afectados, se hace un commit, es decir, se realiza la modificación en el DOM:
     
-    ![Screenshot 2025-06-02 at 12.52.33.png](attachment:7416f964-ba44-4d24-8cb0-f540955dde37:Screenshot_2025-06-02_at_12.52.33.png)
+    ![Árbol con la estructura de los componentes de la app](./public/cuáles-son-las-3-fases-del-renderizado-en-react(4).png)
 
 
 ---
@@ -1495,7 +1495,7 @@ El problema con esto, es que muchas veces, estos props pasan de forma manual por
 
 Si no pasa por muchos, esto no es un problema, pero a veces sucede lo siguiente:
 
-![Screenshot 2025-05-11 at 19.17.37.png](attachment:eab7cbbf-df3d-470a-b0b0-5e02d3387228:Screenshot_2025-05-11_at_19.17.37.png)
+![Screenshot 2025-05-11 at 19.17.37.png](./public/qué-es-prop-drilling.png)
 
 El valor del state solo era manejado por los componentes de la derecha, hasta que el componente de la izquierda comenzó a necesitar acceder a esa data, haciendo que la declaración del state tenga que ir a lo más alto del árbol, y pasar esa data por un montón de componentes hijos que no hacen uso de la misma, hasta llegar al componente necesario.
 
@@ -1515,13 +1515,13 @@ El valor del state solo era manejado por los componentes de la derecha, hasta qu
 
 Se agrega un parent a la aplicación que va a ser el encargado de distribuir estos states (no siempre tiene que ser en lo más alto de la aplicación).
 
-![Screenshot 2025-05-12 at 11.35.12.png](attachment:14bfc474-66b6-4084-b5d6-56c097dd1447:Screenshot_2025-05-12_at_11.35.12.png)
+![Screenshot 2025-05-12 at 11.35.12.png](./public/qué-es-react-context(1).png)
 
 El **`<Provider />`** va a contener valores, y cualquier componente que necesite acceso a los valores que el **`<Provider />`** contiene usará un **hook** llamado **Use Context**. 
 
 Cuando un componente lo utiliza, obtiene acceso directo e inmediato a esos valores .
 
-![Screenshot 2025-05-12 at 11.39.02.png](attachment:50be90a8-3764-43bb-ab6c-5553e93a8060:Screenshot_2025-05-12_at_11.39.02.png)
+![Screenshot 2025-05-12 at 11.35.12.png](./public/qué-es-react-context(2).png)
 
 En este caso, nos posicionamos en **`App.jsx`**.
 
