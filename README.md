@@ -61,7 +61,6 @@
   - [¿Qué soluciones existen para el Props Drilling?](#qué-soluciones-existen-para-el-props-drilling)
   - [¿Qué es React Context?](#qué-es-react-context)
   - [¿Qué es Compound Component?](#qué-es-compound-component)
-  - 
 
 ---
 
