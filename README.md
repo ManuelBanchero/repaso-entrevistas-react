@@ -2,7 +2,7 @@
   <img height=500 src="./public/readme-image.png">
   <h1>Repaso para entrevista React Junior! 🤓</h1>
 
-<i>45 preguntas con respuestas para que repases antes de tus entrevistas</i>
+<i>Más de 50 preguntas con respuestas para que repases antes de tus entrevistas</i>
 
 <sup>Dame una :star: si te sirvió ❤️</sup>
 
