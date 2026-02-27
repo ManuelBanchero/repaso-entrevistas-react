@@ -16,6 +16,7 @@
 ## Índice
 
 - [Índice](#índice)
+- [Cónceptos de React](#cónceptos-de-react)
   - [¿Qué es React?](#qué-es-react)
   - [¿Por qué usar React?](#por-qué-usar-react)
   - [¿Por qué es Composable?](#por-qué-es-composable)
@@ -61,8 +62,17 @@
   - [¿Qué soluciones existen para el Props Drilling?](#qué-soluciones-existen-para-el-props-drilling)
   - [¿Qué es React Context?](#qué-es-react-context)
   - [¿Qué es Compound Component?](#qué-es-compound-component)
+- [React con TypeScript](#react-con-typescript)
+  - [¿Cómo declarar un `useState` usando TypeScript?](#cómo-declarar-un-useState-usando-typescript)
+  - [¿Cuál es el tipo de dato de los componentes al usar TypeScript?](#cuál-es-el-tipo-de-dato-de-los-componentes-al-usar-typescript)
+  - [¿Cómo asignar los tipos de datos a las props?](#cómo-asignar-los-tipos-de-datos-a-las-props?)
+  - [¿Cómo se declara el type de funciones como props?](#cómo-se-declara-el-type-de-funciones-como-props)
+  - [¿Cuál es el tipo de dato de un children?](#cuál-es-el-tipo-de-dato-de-un=children)
+  - [¿Cuál es el type de un setState en un prop?](#cuál-es-el-type-de-un-setState-en-un-prop)
 
 ---
+
+# Cónceptos de React
 
 ## ¿Qué es React?
 
@@ -1621,3 +1631,172 @@ export { List, ListItem }
 Este es un ejemplo sencillo, pero los componentes pueden ser tan complejos como quieras y tanto el padre como los hijos pueden tener sus propios estados.
 
 Te dejó un ejemplo que tengo más completo a como funciona en este [link](https://www.notion.so/Compound-Components-1f4f81e8719b8080bbabf50841dba2b2?pvs=21).
+
+---
+
+# React con TypeScript
+
+### ¿Cómo declarar un useState usando TypeScrip?
+
+El hook **`useState`** en TS usa [generics](https://www.typescriptlang.org/docs/handbook/2/generics.html) en su definición. Por lo tanto, tenemos que indicarle el tipo de dato del state usando **`<type>`**.
+
+```tsx
+const [state, setState] = useState<Type>(value)
+```
+
+Ejemplo con una función como valor inicial del estado:
+
+```tsx
+const [state, setState] = useState<Type>(():Type => getSomething())
+```
+
+---
+
+### ¿Cuál es el tipo de dato de los componentes al usar TypeScript?
+
+El tipo de dato es **`JSX.Element`**.
+
+```tsx
+import type { JSX } from 'react'
+
+export default function Header(): JSX.Element {
+	return (
+        <header>
+            <h1>Assembly: Endgame</h1>
+            <p>Guess the word within 8 attempts to keep the
+                programming world safe from Assembly!</p>
+        </header>
+    )
+}
+```
+
+También se puede dar el caso de que un componente haga conditional rendering y no retorne nada, entonces:
+
+```tsx
+import Confetti from "react-confetti"
+import type { JSX } from 'react'
+
+export default function ConfettiContainer({ isGameWon }): JSX.Element | null {
+    if (!isGameWon) {
+        return null
+    }
+    else {
+        return (
+            <Confetti
+                recycle={false}
+                numberOfPieces={1000}
+            />
+        )
+    }
+}
+```
+
+---
+
+### ¿Cómo asignar los tipos de datos a las props?
+
+La manera más sencilla es:
+
+```tsx
+import type { JSX } from 'react'
+
+export default function Component({ propName }: { propName: Type }): JSX.Element {
+	return (
+		...
+	)
+}
+```
+
+Pero solo si la cantidad de props de ese componente no es muy grande, porque nos podríamos encontrar con algo como:
+
+```tsx
+export default function GameStatus({
+       isGameWon,
+       isGameLost,
+       isGameOver,
+       isLastGuessIncorrect,
+       wrongGuessCount
+   }:{
+    isGameWon: boolean,
+    isGameLost: boolean,
+    isGameOver: boolean,
+    isLastGuessIncorrect: boolean,
+    wrongGuessCount: number
+}):JSX.Element{
+
+....
+}
+```
+
+Dificultando mucho la lectura del componente.
+
+Para solucionar esto, se utilizan **custom component prop types**.
+
+El estándar para nombrar este Type es el siguiente:
+
+> ComponentNameProps
+> 
+
+Siguiendo con el ejemplo de arriba sería entonces: **`GameStatusProps`**.
+
+```tsx
+type GameStatusProps = {
+    isGameWon: boolean,
+    isGameLost: boolean,
+    isGameOver: boolean,
+    isLastGuessIncorrect: boolean,
+    wrongGuessCount: number
+}
+
+export default function GameStatus({
+   isGameWon,
+   isGameLost,
+   isGameOver,
+   isLastGuessIncorrect,
+   wrongGuessCount
+}:GameStatusProps):JSX.Element{
+...
+}
+```
+
+---
+
+### ¿Cómo se declara el type de funciones como props?
+
+```tsx
+type ComponentProps = {
+	propertie: (params) => ReturnType
+}
+```
+
+---
+
+### ¿Cuál es el tipo de dato de un children?
+
+Cuando recibimos un children como prop, el tipo de dato del mismo es **`ReactNode`**.
+
+```tsx
+import { ReactNode } from 'react'
+
+export default function Component({ children }: { children: ReactNode }) {
+	return (
+		...
+	)
+}
+```
+
+### ¿Cuál es el type de un setState en un prop?
+
+Hay ocaciones, en las que pasamos a componentes hijos el valor del **state** e incluso el **setStateAction**. 
+
+Al trabajar con TypeScript, hay que indicar todos los tipos de datos de las props, incluyendo este. 
+
+La manera de hacerlo es importando **`Dispatch`** y **`SetStateAction`** desde **react.**
+
+```sql
+import { Dispatch, SetStateAction } from 'react'
+
+type ComponentProps = {
+	setState: Dispatch<SetStateAction<Type>>
+}
+```
