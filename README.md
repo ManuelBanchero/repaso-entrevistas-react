@@ -54,7 +54,7 @@
   - [¿Cómo funcionan los Forms en React?](#cómo-funcionan-forms-react)
   - [¿Cómo funicionan los Forms en React 18?](#forms-react-18)
   - [¿Cómo funicionan los Forms en React 19?](#forms-react-19)
-  - [¿Qué es React DOM?](#react-dom(
+  - [¿Qué es React DOM?](#react-dom)
   - [¿Cuáles son las 3 fases del renderizado en React?](#fases-renderizado-react)
   - [¿Qué es un Overloaded Component?](#overloaded-component)
   - [¿Qué es Props Drilling?](#qué-es-prop-drilling)
