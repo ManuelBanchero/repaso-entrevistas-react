@@ -951,21 +951,21 @@ Y acá te dejos ejemplos de la [documentación de React](https://react.dev/learn
     
 2. **Almacenamiento en caché de cálculos costosos:**
     
-    ![Screenshot 2025-05-08 at 15.57.53.png](attachment:a31f028c-eb8a-4d20-bebb-b95b577a6082:Screenshot_2025-05-08_at_15.57.53.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(3).png)
     
-    ![Screenshot 2025-05-08 at 15.58.04.png](attachment:2873803d-5aa1-42a0-b327-d8ad204cb34f:Screenshot_2025-05-08_at_15.58.04.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(4).png)
     
 3. **Restablecer todos los estados cuando cambia un prop:**
     
-    ![Screenshot 2025-05-08 at 15.59.15.png](attachment:4e87fd8a-5f14-4a09-9017-19a522b72de5:Screenshot_2025-05-08_at_15.59.15.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(5).png)
     
-    ![Screenshot 2025-05-08 at 15.59.05.png](attachment:380398b1-abda-49c6-946b-258191d97356:Screenshot_2025-05-08_at_15.59.05.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(6).png)
     
 4. **Ajustar algún estado cuando cambia un prop:**
     
-    ![Screenshot 2025-05-08 at 15.59.41.png](attachment:0fa251b9-81da-4a52-b4a7-8803da3e44f8:Screenshot_2025-05-08_at_15.59.41.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(7).png)
     
-    ![Screenshot 2025-05-08 at 15.59.49.png](attachment:4c481ee9-677f-4e48-8434-93700c5418ed:Screenshot_2025-05-08_at_15.59.49.png)
+    ![código de comparación entre buena y mala práctica](./public/cuándo-no-usar-useEffect(8).png)
     
 ---
 
