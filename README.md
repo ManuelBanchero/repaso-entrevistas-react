@@ -625,8 +625,10 @@ export default function app() {
     Esto es el id del element que se esta agregando, ya que React lo necesita.
     
     La razón es, porque entiende que se estan agregando muchos componentes iguales, y que los mismos pueden ser editados o eliminados dependiendo de la aplicación, por lo tanto, pide tener un identificador único por cada unos de los JSX creados en el array.
+
+   De esta forma, evita volver a renderizar toda la lista innecesariamente si solo un elemento se modifica.
     
-4. Por último, se renderiza el array, y se retorna.
+5. Por último, se renderiza el array, y se retorna.
 
 ---
 
